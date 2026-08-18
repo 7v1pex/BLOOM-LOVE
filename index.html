@@ -3,89 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOOM-LOVE | Fresh Flower Bouquets</title>
+    <title>BLOOM-LOVE | Handcrafted Fresh Flower Bouquets</title>
     <style>
         :root {
             --primary: #e87a90;
+            --primary-hover: #d66178;
             --dark: #2c2c2c;
-            --light: #f9f6f0;
+            --light-bg: #faf7f5;
             --white: #ffffff;
+            --gray: #777777;
+            --border: #e2e2e2;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         body {
-            background-color: var(--light);
+            background-color: var(--light-bg);
             color: var(--dark);
+            line-height: 1.6;
         }
 
+        /* HEADER & NAV */
         header {
             background-color: var(--white);
-            padding: 20px 50px;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 26px;
+            font-weight: 800;
             color: var(--primary);
             letter-spacing: 2px;
+            text-decoration: none;
         }
 
-        .cart-icon {
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .cart-btn {
             background: var(--primary);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
             cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        .cart-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* HERO SECTION */
         .hero {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1200&q=80') center/cover;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1600&q=80') center/cover;
+            color: white;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 15px;
-            color: var(--dark);
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: 18px;
-            color: #666;
+            font-size: 20px;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 25px;
         }
 
+        .hero-btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 5%;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* PRODUCTS SECTION */
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 32px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: var(--gray);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -94,16 +164,29 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
+            position: relative;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
         }
 
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
         .product-img {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
         }
 
@@ -113,100 +196,505 @@
 
         .product-title {
             font-size: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .product-price {
-            font-size: 18px;
-            color: var(--primary);
-            font-weight: bold;
+        .product-desc {
+            font-size: 14px;
+            color: var(--gray);
             margin-bottom: 15px;
         }
 
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
         .add-to-cart {
-            width: 100%;
-            padding: 10px;
+            padding: 10px 18px;
             background: var(--dark);
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
+            font-weight: 600;
+            transition: background 0.2s;
         }
 
         .add-to-cart:hover {
             background: var(--primary);
         }
 
-        footer {
-            text-align: center;
-            padding: 30px;
+        /* CART SIDEBAR */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 200;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            max-width: 100%;
+            height: 100%;
             background: var(--white);
-            margin-top: 80px;
-            color: #888;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 201;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .remove-item {
+            color: red;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* MODAL CHECKOUT FORM */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 5% 20px;
+            margin-top: 100px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-col h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 40px;
+            color: #aaa;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
+    <!-- HEADER -->
     <header>
-        <div class="logo">BLOOM-LOVE</div>
-        <div class="cart-icon" onclick="alert('Checkout integration coming soon!')">
-            Cart (<span id="cart-count">0</span>)
-        </div>
+        <a href="#" class="logo">BLOOM-LOVE</a>
+        <nav>
+            <a href="#shop">Shop</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </button>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
-        <h1>Handcrafted Bouquets for Every Moment</h1>
-        <p>Fresh, beautiful flowers delivered straight to your door with love and care.</p>
+        <h1>Fresh Flowers, Delivered with Love</h1>
+        <p>Handcrafted artisan bouquets made daily with fresh seasonal blooms for your special moments.</p>
+        <a href="#shop" class="hero-btn">Explore Collection</a>
     </section>
 
-    <div class="container">
-        <h2 class="section-title">Our Best Sellers</h2>
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="feature-item">
+            <h4>🚀 Same-Day Delivery</h4>
+            <p>Order before 2 PM for local delivery</p>
+        </div>
+        <div class="feature-item">
+            <h4>🌸 7-Day Freshness</h4>
+            <p>Guaranteed long-lasting blooms</p>
+        </div>
+        <div class="feature-item">
+            <h4>💌 Free Personal Note</h4>
+            <p>Add a customized message card</p>
+        </div>
+    </section>
+
+    <!-- SHOP PRODUCTS -->
+    <div class="container" id="shop">
+        <div class="section-title">
+            <h2>Our Signature Bouquets</h2>
+            <p>Select your favorite flowers for delivery or pickup</p>
+        </div>
+
         <div class="products-grid">
 
+            <!-- Product 1 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Romantic Rose Bouquet" class="product-img">
+                <span class="product-badge">Best Seller</span>
+                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Velvet Romance" class="product-img">
                 <div class="product-info">
-                    <h3 class="product-title">Romantic Rose Bouquet</h3>
-                    <div class="product-price">$45.00</div>
-                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <h3 class="product-title">Velvet Romance</h3>
+                    <p class="product-desc">Premium red roses combined with delicate baby’s breath and eucalyptus.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$49.99</div>
+                        <button class="add-to-cart" onclick="addToCart('Velvet Romance', 49.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Product 2 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Spring Blossom Mix" class="product-img">
+                <span class="product-badge">Popular</span>
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Spring Meadow" class="product-img">
                 <div class="product-info">
-                    <h3 class="product-title">Spring Blossom Mix</h3>
-                    <div class="product-price">$38.00</div>
-                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <h3 class="product-title">Spring Meadow</h3>
+                    <p class="product-desc">A vibrant mix of pink tulips, daisies, and seasonal spring flowers.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$39.99</div>
+                        <button class="add-to-cart" onclick="addToCart('Spring Meadow', 39.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- Product 3 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Sunshine Sunflower Special" class="product-img">
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Sunshine Delight" class="product-img">
                 <div class="product-info">
-                    <h3 class="product-title">Sunshine Sunflower Special</h3>
-                    <div class="product-price">$40.00</div>
-                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <h3 class="product-title">Sunshine Delight</h3>
+                    <p class="product-desc">Bright sunflowers paired with yellow carnations and lush greenery.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$42.50</div>
+                        <button class="add-to-cart" onclick="addToCart('Sunshine Delight', 42.50)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <span class="product-badge">New</span>
+                <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80" alt="Pastel Dreams" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pastel Dreams</h3>
+                    <p class="product-desc">Elegant soft pink hydrangeas and cream roses for a subtle touch.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$54.99</div>
+                        <button class="add-to-cart" onclick="addToCart('Pastel Dreams', 54.99)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?auto=format&fit=crop&w=600&q=80" alt="White Elegance" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">White Elegance</h3>
+                    <p class="product-desc">Pure white lilies and white roses for sympathy or formal occasions.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$47.00</div>
+                        <button class="add-to-cart" onclick="addToCart('White Elegance', 47.00)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=600&q=80" alt="Wildflower Harmony" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Wildflower Harmony</h3>
+                    <p class="product-desc">Rustic arrangement featuring fresh field flowers and lavender.</p>
+                    <div class="product-bottom">
+                        <div class="product-price">$36.99</div>
+                        <button class="add-to-cart" onclick="addToCart('Wildflower Harmony', 36.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 BLOOM-LOVE. All rights reserved.</p>
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p style="text-align: center; color: var(--gray); margin-top: 30px;">Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <h3>Complete Your Order</h3>
+            <form onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <input type="text" required placeholder="123 Flower Street, City">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Delivery Date</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Personal Message Card (Optional)</label>
+                    <textarea rows="3" placeholder="Write a message for the recipient..."></textarea>
+                </div>
+                <button type="submit" class="checkout-btn">Place Order Now</button>
+                <button type="button" class="checkout-btn" style="background: #ccc; margin-top: 10px;" onclick="closeCheckout()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>BLOOM-LOVE</h4>
+                <p>Spreading joy through beautiful, fresh hand-picked flowers everyday.</p>
+            </div>
+            <div class="footer-col" id="about">
+                <h4>Quick Links</h4>
+                <p><a href="#shop" style="color: white; text-decoration: none;">Shop Bouquets</a></p>
+                <p><a href="#about" style="color: white; text-decoration: none;">About Us</a></p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p>Email: hello@bloom-love.com</p>
+                <p>Phone: +1 (555) 019-2834</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BLOOM-LOVE. All rights reserved.</p>
+        </div>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        let count = 0;
-        function addToCart() {
-            count++;
-            document.getElementById('cart-count').innerText = count;
+        let cart = [];
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            sidebar.classList.toggle('open');
+            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCart();
+            toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+
+            cartCount.innerText = cart.length;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--gray); margin-top: 30px;">Your cart is currently empty.</p>';
+                cartTotalPrice.innerText = '$0.00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <span class="remove-item" onclick="removeFromCart(${index})">Remove</span>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartTotalPrice.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            alert('Thank you for your order! We have received your request and will contact you shortly.');
+            cart = [];
+            updateCart();
+            closeCheckout();
+            toggleCart();
         }
     </script>
-
 </body>
 </html>
